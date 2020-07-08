@@ -3,7 +3,8 @@ const express = require('express');
 
 const app = express();
 
-app.get('/accueil', async (req, res) => {
+app.get('/accueil', (req, res) => {
+  //juste envoyer le formulaire
   res.sendFile('paccueil_view.html', {root: __dirname })}
 );
 

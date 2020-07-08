@@ -1,9 +1,11 @@
 const puppeteer = require('puppeteer');
 
 //utiliser la variable 'data' comme tu veux...
-async function findData( data ) {
-  return new Promise( (resolve) => {
-
+function findData( data ) {
+  return new Promise( async resolve => {
+    
+    //code d'example du scraping
+    //changer pour ce que tu vas faire
     const url = 'https://youtube.com/';
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
