@@ -31,7 +31,7 @@ res.sendFile('paccueil_view.html', {root: __dirname })}
 
 
 app.get('/action', async (req, res) => {
-res.sendFile('paccueil_view.html', {root: __dirname })}
+res.json({test : req.query.test})
 );
 
 
