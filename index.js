@@ -1,27 +1,26 @@
-const puppeteer = require('puppeteer');
+const myModule = require('./myModule');
 const express = require('express');
 
 const app = express();
-const url = 'https://youtube.com/';
 
-app.get('/retourPuppeteer', async (req, res) => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto(url, {waitUntil: 'networkidle2'});
+app.get('/accueil', (req, res) => {
+  //juste envoyer le formulaire
+  res.sendFile('paccueil_view.html', {root: __dirname })}
+);
 
-  //take screenshot
-  await page.screenshot({path: 'tahaEstCon.png'});
 
-  //wait to display the element
-  await page.waitForXPath("(//*[@id='video-title'])[1]");
+app.get('/action', async (req, res) => {
+  //on va recuperer les données du formulaire
+  const data = {
+    date : req.query.date,
+    //les autres données vont ici
+  };
 
-  let elHandle = await page.$x("(//*[@id='video-title'])[1]");
+  //utiliser le module pour faire qqch avec puppeteer
+  const titleVideo = await myModule.findData(data);
 
-  let lamudiNewPropertyCount = await page.evaluate(el => el.textContent, elHandle[0]);
-
-  await browser.close();
-
-  res.send(lamudiNewPropertyCount);
+  //afficher les donnes du formulaire
+  res.json({data, titleVideo})
 });
 
 
